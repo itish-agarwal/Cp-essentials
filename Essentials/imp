@@ -1,0 +1,27 @@
+1. Sum of euler totient function of all the the positive divisors of a number is equal to the number
+
+2. Euler totient function of some number 2^k = 2^k - 2^(k-1)
+   Euler totient function of prime^k = p^k - p^(k-1)
+   
+   
+3. Number of subarray with exactly K distinct integers = number of subarrays with at most K distinct integers - number of  subarrays with at most K-1 distinct integers.
+
+4. Iterate over submask of a mask (ie, 5->101 so its submasks are 101, 100, 101) :
+   int mask; cin >> mask;
+   for(int submask = mask; submask; submask = (submask-1)&mask) cout<<submask<<'\n';
+   
+5. for(mask) {
+    for(all submasks of mask) {
+     O(1) work;
+    }
+   }
+   Time complexity -> 3^n (mask -> [0, 2^n-1]); 
+   
+   
+6. If we given queries of LCA on unrooted tree, ie, r u v means we are to tell LCA of u, v when root is r, then how to do?
+   Root the tree at any node n and run LCA dfs, then,
+   find l1 = LCA(n, r, u);
+   find l2 = LCA(n, r, v);
+   find l3 = LCA(n, u, v);
+   and take the odd number out, ie, if two are equal and one is different, then take the different one, if all are equal, then
+   take that only.
