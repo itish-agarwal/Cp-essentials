@@ -1,46 +1,31 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-#define int long long 
 
-vector<vector<pair<int, int>>> g;
+vector<vector<pair<int, int>>> edges;
+const int INF = 2e9 + 7;
 vector<int> par, dist, vis;
-int n, e, inf;
+int n, e;
 
 void dijkstra(int sc) {
-
   dist[sc] = 0;
-  par[sc] = -1;
-
-  priority_queue<pair<int, int>> pq;
-  //-dist, node
-  pq.push(make_pair(0, sc));
-
-  while(!pq.empty()) {
-
-    pair<int, int> fs = pq.top();
-    pq.pop();
-
-    int u = fs.second;
-      
-    if(vis[u]) {
-      continue;
-    }
-    vis[u] = true;
-    for(auto p : g[u]) {
+  set<pair<int, int>> q;
+  q.insert({0, sc});
+  while(!q.empty()) {
+    int u = q.begin() -> second;
+    q.erase(q.begin());
+    for(auto p : edges[u]) {
       int v = p.first;
-      int wt = p.second;
-      if(dist[u] + wt < dist[v]) {	
-		cout << v << endl;
-        dist[v] = dist[u] + wt;
+      int w = p.second;
+      if(dist[u] + w < dist[v]) {
+        q.erase({dist[v], v});
+        dist[v] = dist[u] + w;
         par[v] = u;
-        pq.push(make_pair(-dist[v], v));
+        q.insert({dist[v], v});
       }
     }
   }
-  return;
 }
-
 void print(int cur, int dest) {
   if(cur == dest) {
     cout << cur << " ";
@@ -50,32 +35,31 @@ void print(int cur, int dest) {
   cout << cur << " ";
   return;
 }
-
-signed main() {
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  inf = 1e18 + 555;
+  
   cin >> n >> e;
-  g.resize(n+1);
+
+  edges.resize(n+1);
   par.resize(n+1);
-  dist.assign(n+1, inf);
+  dist.assign(n+1, INF);
   vis.assign(n+1, false);
 
   while(e--) {
-    int a, b, w;
-    cin >> a >> b >> w;
-    g[a].push_back(make_pair(b, w));
-    g[b].push_back(make_pair(a, w));
+    int a, b;
+    cin >> a >> b;
+    edges[a].push_back(make_pair(b, -1));
   }
 
-  dijkstra(6);
-  
-  if(dist[n]==inf) {
-    cout << "-1\n";
+  dijkstra(1);
+  if(dist[n] >= INF) {
+    cout << "IMPOSSIBLE\n";
     return 0;
   }
-  cout << '\n';
-  return 0;
+
+  cout << -dist[n] + 1 << '\n';
+  print(n, 1);
 }
 
 

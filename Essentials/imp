@@ -25,3 +25,59 @@
    find l3 = LCA(n, u, v);
    and take the odd number out, ie, if two are equal and one is different, then take the different one, if all are equal, then
    take that only.
+   
+   
+ 7. For the derrangement theorem
+ 	dp[i] = (i-1)*(d[i-1] + d[i-2])
+ 
+ 
+ 8. Manhattan distance between two cartesian points
+ 	dist((x1, y1), (x2, y2)) = max(abs(x1 + y1 - (x2 + y2)), abs(x1 - y1 - (x2 - y2)));
+
+
+ 9. Let sum of divisors of a number n = d(n);
+ Then d(a . b) = d(a) * d(b) if __gcd(a, b) == 1;
+ 
+ 
+ 10. a(n) = (n! * n * (n - 1))/4 gives the total number of inversions in all the permutations 
+     of a number n
+     
+ 11. For any event if we have 2 outcomes, success with probability p and failure with prob 1 - p;
+     Then find expected number of trails to get a success.
+     Answer = 1 / p;
+     
+ 12. When we throw a dice, find expected number of throws so that all numbers appear atleast once
+     Let x1 = throws to get 1 distinct
+     Let x2 = throws to get 2nd distinct after getting 1 distinct, and so on.
+     
+     Then clearly x1 = 1;
+     x2 = (success -> (n - 1) / n, failure -> 1 / n);
+     x3 = (success -> (n - 2) / n, failure -> 2 / n);
+     	
+     Expected number of throws = x1 + x2 + x3 + ....
+     				= 1 + n/(n-1) + n/(n-2) + .....
+     				
+13. summation(N / i) (i = 1 to N) -> O(NlogN)
+    summation(N / i) (i = primes from 2 to N) -> O(NloglogN)
+    
+14.
+    Find using matrix exponentiation, for a matrix A, 
+    A + A^2 + A^3 + ...... + A^n (n -> 10^9);
+
+    We have,
+
+    A + A^2 = A(I + A)
+    A + A^2 + A^3 = A(I + A) + A^3
+    A + A^2 + A^3 + A^4 = (A + A^2)(I + A^2)
+                    = A(I + A)(I + A^2)
+    Let
+
+    B(n) = A + ... + A^n
+    We have:
+
+    B(1) = A
+    B(n) = B(n / 2) * (I + A^(n / 2)) if n is even
+    B(n) = B(n / 2) * (I + A^(n / 2)) + A^n if n is odd
+     				
+     
+     

@@ -6,33 +6,33 @@
 using namespace std;
 #define int long long
 
-int dist[404][404], par[404][404];
-
-void printPath(int i, int j) {
-  if(i != j) {
-    printPath(i, par[i][j]);
-    return;
-  }
-  cout << j << endl;
-  return;
-}
+int dist[506][506], par[404][404];
 
 void solve() {
-  int n, m;
-  cin >> n >> m;
+  int n;
+  cin >> n;
 
   for(int i = 0; i < n; i++) {
+    // for(int j = 0; j < n; j++) {
+    //   if(i!=j) {
+    //     dist[i][j] = 1e9;
+    //   }
+    // }
+    int a;
+    cin >> a;
     for(int j = 0; j < n; j++) {
-      if(i!=j) {
-        dist[i][j] = 1e9;
+      if(i != j) {
+        dist[i][j] = a;
       }
     }
   }
+  int m;
+  cin >> m;
 
-  while(e--) {
+  while(m--) {
     int a, b, w;
     cin >> a >> b >> w;
-    dist[a][b] = min(dist[a][b], w);
+    dist[a][b] = w;
   }
 
   //What does par[i][j] store?
@@ -57,7 +57,13 @@ void solve() {
     }
   }
 
-  printPath(x, y);
+  int s = 0;
+  for(int i = 0; i < n; i++) {
+    for(int j = 0; j < n; ++j) {
+      s += dist[i][j];
+    }
+  }
+  cout << s << '\n';
   //Find the that gives us the shortest path between any pair of vertices
   //We create another array par[][]
 
@@ -68,7 +74,10 @@ void solve() {
 signed main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  
+  int tt;
+  cin >> tt;
+  while(tt-- ) {
   solve();
+}
 }
   

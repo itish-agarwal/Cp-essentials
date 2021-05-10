@@ -3,6 +3,21 @@
 using namespace std;
 #define int long long
 
+void eulerPhi(int n) {
+  int phi[n + 1];
+  for(int i = 1; i <= n; ++i) phi[i] = i;
+  for(int i = 2; i <= n; ++i) {
+    if(phi[i] == i) {
+      phi[i] = i - 1;
+      for(int p = i + i; p <= n; p++) {
+        phi[i] *= (p-1);
+        phi[i] /= p;
+      }
+    }
+  }
+  
+}
+
 signed main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
