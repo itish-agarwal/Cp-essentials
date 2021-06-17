@@ -1,0 +1,13 @@
+// function<void(int, int)> Dfs = [&](int v, int pr) {
+  //     dp[v][0] = 0;
+  //     dp[v][1] = 0;
+  //     for (int u : g[v]) {
+  //       if (u == pr) {
+  //         continue;
+  //       }
+  //       Dfs(u, v);
+  //       for (int x = 0; x < 2; x++) {
+  //         dp[v][x] += max(dp[u][0] + abs(a[v][x] - a[u][0]), dp[u][1] + abs(a[v][x] - a[u][1]));
+  //       }
+  //     }
+  //   };

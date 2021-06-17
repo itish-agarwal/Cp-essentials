@@ -79,5 +79,93 @@
     B(n) = B(n / 2) * (I + A^(n / 2)) if n is even
     B(n) = B(n / 2) * (I + A^(n / 2)) + A^n if n is odd
      				
+
+15.
+   Product of divisors when list of primes and their respective powers are given
+
+   Let the product and number of divisors when only considering the first $i$ prime
+   factors be $P_i$ and $C_i$ respectively. The answer will be $P_N$.
+
+   $$\begin{aligned} P_i &= P_{i - 1}^{k_i + 1} \left(x_i^{k_i(k_i + 1)/2} \right)^{C_{i - 1}} \end{aligned}$$
+
+   Again, we can calculate each $P_i$ using fast exponentiation in
+   $\mathcal O(N \log(\max(k_i)))$ time, but there's a catch! It might be tempting
+   to use $C_{i - 1}$ from your previously-calculated values in part 1 of this
+   problem, but those values will yield wrong answers.
+
+   This is because $a^b \not \equiv a^{b \bmod p} \pmod{p}$ in general. However, by
+   Fermat's little theorem, $a^b \equiv a^{b \bmod (p - 1)} \pmod{p}$ for prime
+   $p$, so we can just store $C_i$ modulo $10^9 + 6$ to calculate $P_i$.
+   
+   SEE CSES DIVISOR ANALYSIS
+   Solution -> https://usaco.guide/problems/cses-2182-divisor-analysis/solution
+   
+16. (CSES counting necklaces) Your task is to count the number of different necklaces that consist of n pearls and each pearl has m possible colors.
+
+Two necklaces are considered to be different if it is not possible to rotate one of them so that they look the same.
+
+Formula is ->
+ (summation(0, n - 1) m^gcd(i, n)) / n
+
+17. Count number of distinct palindromic subsequences of a string
+    Leetcode 730
+    
+    Imp link : https://csacademy.com/contest/round-57/task/distinct-palindromes/solution/
+
+
+18. IMPORTANT
+See this question -> https://leetcode.com/problems/maximum-of-absolute-value-expression/
+
+Useful links -> https://en.wikipedia.org/wiki/Chebyshev_distance
+
+Best post -> https://leetcode.com/problems/maximum-of-absolute-value-expression/discuss/347046/Python-ManhattanChebyshev-Distance
+
+Similar question -> Find max manhattan distance between two points from a given set of points ->
+https://www.geeksforgeeks.org/maximum-manhattan-distance-between-a-distinct-pair-from-n-coordinates/#:~:text=The%20Manhattan%20Distance%20between%20two,%2B%20%7CY1%20%E2%80%93%20Y2%7C.
+
+Chebyshev dist between (x1,y1) and (x2,y2) = max(|x1-x2|, |y1-y2|)
+
+Manhattan((x1, y1), (x2, y2))
+    = |x1 - x2| + |y1 - y2|
+    = max(
+        |(x1 - x2) + (y1 - y2)|,
+        |(x1 - x2) - (y1 - y2)|
+    )
+    = max(
+        |(x1 + y1) - (x2 + y2)|,
+        |(x1 - y1) - (x2 - y2)|
+    )
+    
+    = Chebyshev((x1+y1, x1-y1), (x2+y2, x2-y2))
+   
+   
+   
+   In 3D, we replace each point, (x, y, z), with (x+y+z, x+y-z, x-y+z, x-y-z):
+
+|x1 - x2| + |y1 - y2| + |z1 - z2| 
+    = max(
+        |(x1 - x2) + (y1 - y2) + (z1 - z2)|,
+	    |(x1 - x2) + (y1 - y2) - (z1 - z2)|,
+	    |(x1 - x2) - (y1 - y2) + (z1 - z2)|,
+	    |(x1 - x2) - (y1 - y2) - (z1 - z2)|
+    )
+    = max(
+        |(x1 + y1 + z1) - (x2 + y2 + z2)|,
+	    |(x1 + y1 - z1) - (x2 + y2 - z2)|,
+	    |(x1 - y1 + z1) - (x2 - y2 + z2)|,
+	    |(x1 - y1 - z1) - (x2 - y2 - z2)|
+    )
+    
+    
+19. If m is a prime number we can speed up a bit this algorithm by calculating x^(n mod(m−1)) instead of x^n
      
-     
+20. Eulcidean algorithm for finding gcd:
+The running time of the algorithm is estimated by Lamé's theorem, which establishes a surprising connection between the Euclidean algorithm and the Fibonacci sequence:
+
+If a>b≥1 and b<Fn for some n, the Euclidean algorithm performs at most n−2 recursive calls.
+
+Moreover, it is possible to show that the upper bound of this theorem is optimal. When a=Fn and b=Fn−1, gcd(a,b) will perform exactly n−2 recursive calls. In other words, consecutive Fibonacci numbers are the worst case input for Euclid's algorithm.
+
+Given that Fibonacci numbers grow exponentially, we get that the Euclidean algorithm works in O(logmin(a,b)).
+
+
