@@ -57,17 +57,17 @@ struct graph {
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  while(1) {
-    int n, m;
-    cin >> n >> m;
-    if(!n && !m) goto done;
-    graph g(n);
-    while(m--) {
-      int u, v;
-      cin >> u >> v;
-      g.add_edge(u, v);
-    }
-    cout << g.get_cutpoints() << '\n';
+  int n, m;
+  cin >> n >> m;
+  graph g(n);
+  while(m--) {
+    int u, v;
+    cin >> u >> v;
+    g.add_edge(u, v);
   }
-  done: return 0;
+  cout << g.get_cutpoints() << '\n';
+  for(int c : g.cuts)
+    cout << c << " ";
+  cout << '\n';
+  return 0;
 }

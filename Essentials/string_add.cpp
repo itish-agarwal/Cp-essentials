@@ -33,7 +33,7 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
 
-  cout << add("011", "02") <<endl;
+  cout << add("200", "13421") <<endl;
 
 
 }
